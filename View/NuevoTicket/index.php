@@ -33,46 +33,39 @@ if(isset($_SESSION["Id_Usuario"])){
 							<ol class="breadcrumb breadcrumb-simple">
 								<li><a href="../Home/">Inicio</a></li>
 								<li class="active">Nuevo Ticket</li>
-							</ol>
-						</div>
-					</div>
-				</div>
+							</ol><!--breadcrumb-->
+						</div><!--tbl-cell-->
+					</div><!--tbl-row-->
+				</div><!--tbl-->
 			</header>
+
 			<div class="box-typical box-typical-padding">
-
-			<!-- <div class="alert alert-blue-dirty alert-fill alert-close alert-dismissible fade in" role="alert">
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-								<span aria-hidden="true">×</span>
-							</button>
-							<smile>En esta ventana, puedes crear un nuevo ticket para reportar un problema o hacer una consulta. Por favor, completa todos los campos.</smile>
-			</div> -->
-				<p>
-					 
-				</p>
-
 				<h5 class="m-t-lg with-border">Generar Ticket</h5>
-
+				<!-- FORMULARIO PARA GENERAR UN NUEVO TICKET -->
 				<form method="post" id="ticket_form">
-
+					<!-- CAMPO OCULTO PARA GUARDAR EL ID DEL USUARIO -->
 					<input type="hidden" id="id_Usuario" name="id_Usuario" value="<?php echo $_SESSION["Id_Usuario"]?>">
-
-
+					
 					<div class="form-group row">
+						<!-- CAMPO PARA SELECCIONAR LA CATEGORIA DEL TICKET -->
 						<label class="col-sm-2 form-label semiblod" for="id_Categoria">Categoria:</label>
 						<div class="col-sm-10">
 							<select id="id_Categoria" name="id_Categoria" class="form-control">
-								
+								<!-- OPCIONES DE LA CATEGORIA DESDE JS-->
 							</select>
 						</div>
 					</div>
 
 					<div class="form-group row">
+						<!-- CAMPO PARA DIGITAR EL TITULO DEL TICKET -->
 						<label class="col-sm-2 form-label semiblod" for="tit_Ticket">Titulo:</label>
 						<div class="col-sm-10">
 							<input type="text" id="tit_Ticket" name="tit_Ticket" enable class="form-control" id="inputPassword">
 						</div>
 					</div>
+
 					<div class="form-group row">
+						<!-- CAMPO PARA DIGITAR LA DESCRIPCION DEL TICKET -->
 						<label class="col-sm-2 form-label semiblod" for="desc_Ticket">Descripción:</label>
 						<div class="col-sm-10">
 							<div class="summernote-theme-3 " class="summernote" placeholder="first placeholder">
@@ -80,14 +73,12 @@ if(isset($_SESSION["Id_Usuario"])){
 							</div>
 						</div>
 					</div>
+					<!--CONTROL DEL BOTON ENVIAR EL TICKET-->
 					<button type="submit" name="action" value="add" class="btn btn-inline btn-primary ladda-button" data-style="expand-left"><span class="ladda-label">Enviar Ticket</span><span class="ladda-spinner"></span></button>
-				</form>
-			</div>
-		</div>
-	</div>
-
-	
-
+				</form><!--ticket_form-->
+			</div><!--box-typical box-typical-padding-->
+		</div><!--container-fluid-->
+	</div><!--page-content-->
 	<!-- HACEMOS USO DE LOS ARCHIVOS JS DE LA PAGINA -->
     <?php require_once("../MainJs/Js.php");?>
 	<!-- AGREGAMOS EL ARCHIVO JS QUE VA CONTRALAR EL HTML DE HOME -->

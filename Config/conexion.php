@@ -26,6 +26,6 @@ class Conectar{
 
     #METODO DE LA RUTA DEL PROYECTO
     public function ruta(){
-        return "http://localhost:80/AppHelpDesk/";
+        return "http://localhost:80/DM_HelpDesk/";
     }
 }
