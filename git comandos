@@ -1,0 +1,94 @@
+https://youtu.be/tFr0Vg1q9Eg - manego de branch git
+
+
+
+nothing to commit, working tree clean
+
+zr11@DESKTOP-EE5OMUJ MINGW64 /c/laragon/www/App_HelpDesk (main)
+$ git log --oneline
+fd7547c (HEAD -> main, origin/main, origin/HEAD) Cargar Datos
+bf00d0f Initial commit
+
+zr11@DESKTOP-EE5OMUJ MINGW64 /c/laragon/www/App_HelpDesk (main)
+$ git branch ticketNuevo
+
+zr11@DESKTOP-EE5OMUJ MINGW64 /c/laragon/www/App_HelpDesk (main)
+$ git checkout ticketNuevo
+Switched to branch 'ticketNuevo'
+
+zr11@DESKTOP-EE5OMUJ MINGW64 /c/laragon/www/App_HelpDesk (ticketNuevo)
+$ git branch
+  main
+* ticketNuevo
+
+zr11@DESKTOP-EE5OMUJ MINGW64 /c/laragon/www/App_HelpDesk (ticketNuevo)
+$ git add .
+
+zr11@DESKTOP-EE5OMUJ MINGW64 /c/laragon/www/App_HelpDesk (ticketNuevo)
+$ git commit -m "Se Agrega Nuevo Ticket - bd"
+[ticketNuevo ed194ef] Se Agrega Nuevo Ticket - bd
+ 1 file changed, 88 insertions(+)
+ create mode 100644 bd_actualizado21-11-24.sql
+
+zr11@DESKTOP-EE5OMUJ MINGW64 /c/laragon/www/App_HelpDesk (ticketNuevo)
+$ git log --online
+fatal: unrecognized argument: --online
+
+zr11@DESKTOP-EE5OMUJ MINGW64 /c/laragon/www/App_HelpDesk (ticketNuevo)
+$ git log --oneline
+ed194ef (HEAD -> ticketNuevo) Se Agrega Nuevo Ticket - bd
+fd7547c (origin/main, origin/HEAD, main) Cargar Datos
+bf00d0f Initial commit
+
+zr11@DESKTOP-EE5OMUJ MINGW64 /c/laragon/www/App_HelpDesk (ticketNuevo)
+$ ls
+Config/      Docs/   README.md  bd_actualizado21-11-24.sql  index.php
+Controller/  Model/  View/      clasificacionRNN.ipynb      public/
+
+zr11@DESKTOP-EE5OMUJ MINGW64 /c/laragon/www/App_HelpDesk (ticketNuevo)
+$ git fetch
+
+zr11@DESKTOP-EE5OMUJ MINGW64 /c/laragon/www/App_HelpDesk (ticketNuevo)
+$ git push origin ticketNuevo
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 1.57 KiB | 1.57 MiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+remote:
+remote: Create a pull request for 'ticketNuevo' on GitHub by visiting:
+remote:      https://github.com/zrelmer/App_HelpDesk/pull/new/ticketNuevo
+remote:
+To https://github.com/zrelmer/App_HelpDesk.git
+ * [new branch]      ticketNuevo -> ticketNuevo
+
+zr11@DESKTOP-EE5OMUJ MINGW64 /c/laragon/www/App_HelpDesk (ticketNuevo)
+$ git chekout master
+git: 'chekout' is not a git command. See 'git --help'.
+
+The most similar command is
+        checkout
+
+zr11@DESKTOP-EE5OMUJ MINGW64 /c/laragon/www/App_HelpDesk (ticketNuevo)
+$ git checkout master
+error: pathspec 'master' did not match any file(s) known to git
+
+zr11@DESKTOP-EE5OMUJ MINGW64 /c/laragon/www/App_HelpDesk (ticketNuevo)
+$ git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+
+zr11@DESKTOP-EE5OMUJ MINGW64 /c/laragon/www/App_HelpDesk (main)
+$ git branch
+* main
+  ticketNuevo
+
+zr11@DESKTOP-EE5OMUJ MINGW64 /c/laragon/www/App_HelpDesk (main)
+$ git merge ticketNuevo
+Updating fd7547c..ed194ef
+Fast-forward
+ bd_actualizado21-11-24.sql | 88 ++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 88 insertions(+)
+ create mode 100644 bd_actualizado21-11-24.sql
