@@ -65,17 +65,6 @@ To https://github.com/zrelmer/App_HelpDesk.git
  * [new branch]      ticketNuevo -> ticketNuevo
 
 zr11@DESKTOP-EE5OMUJ MINGW64 /c/laragon/www/App_HelpDesk (ticketNuevo)
-$ git chekout master
-git: 'chekout' is not a git command. See 'git --help'.
-
-The most similar command is
-        checkout
-
-zr11@DESKTOP-EE5OMUJ MINGW64 /c/laragon/www/App_HelpDesk (ticketNuevo)
-$ git checkout master
-error: pathspec 'master' did not match any file(s) known to git
-
-zr11@DESKTOP-EE5OMUJ MINGW64 /c/laragon/www/App_HelpDesk (ticketNuevo)
 $ git checkout main
 Switched to branch 'main'
 Your branch is up to date with 'origin/main'.
