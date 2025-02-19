@@ -91,7 +91,7 @@ async function cargarDatos() {
 
 // Función para ver detalles del ticket
 function ver(Id_Ticket) {
-    window.open(`http://localhost:80/AppHelpDesk/View/DetalleTicket/index.php?Id_Ticket=${Id_Ticket}`, '_blank');
+    window.open(`http://localhost:80/DM_HelpDesk/View/DetalleTicket/index.php?Id_Ticket=${Id_Ticket}`, '_blank');
 }
 
 // Inicialización

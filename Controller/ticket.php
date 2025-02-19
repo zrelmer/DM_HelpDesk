@@ -114,4 +114,134 @@ if (isset($_GET["option"]) && $_GET["option"] == "insert") {
         "aaData" => $data
     ];
     echo json_encode($results);
+
+#--------------------------------------------------------------------------------------------------------------------------------------------
+#---------------------------------------- MOSTRAMOS LOS DETALLES DE UN TICKET ---------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------------------------------    
+}elseif (isset($_GET["option"]) && $_GET["option"] == "MostrarTicketDetalle_ticket") {
+    $datos = $ticket->MostrarTicketDetalle_ticket($_POST['Id_Ticket']);
+    ?>
+        <?php
+            foreach ($datos as $row) {
+                ?>
+                <article class="activity-line-item box-typical">
+                    <div class="activity-line-date">
+                        <!-- <?php echo $row["Fecha_Creacion"]; ?> -->
+                        <?php echo date("d/m/Y", strtotime($row["Fecha_Creacion"]));?>
+                    </div>
+                    <header class="activity-line-item-header">
+                        <div class="activity-line-item-user">
+                            <div class="activity-line-item-user-photo">
+                                <a href="#">
+                                    <img src="../../public/img/photo-64-1.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="activity-line-item-user-name"> <?php echo $row["Nom_Usuario"].' '.$row["Ape_Usuario"]; ?> </div>
+                            <div class="activity-line-item-user-status">
+                                <?php
+                                    if (isset($row['Id_Rol'])) {
+                                        if ($row['Id_Rol'] == 1) {
+                                            echo 'Usuario';
+                                        } else {
+                                            echo 'Tecnico';
+                                        }
+                                    } else {
+                                        echo 'Role not defined';
+                                    }
+                                ?>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="activity-line-action-list">
+                        <section class="activity-line-action">
+                            <div class="time">
+                                <!-- <?php echo $row["Fecha_Creacion"]; ?> -->
+                                <?php echo date("H:i:s", strtotime($row["Fecha_Creacion"]));?>
+                            </div>
+                            <div class="cont">
+                                <div class="cont-in">
+                                    <p> 
+                                        <?php echo $row["Desc_Detalle"];?>
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </article>
+            <?php
+        }
+    ?>
+<?php
+#--------------------------------------------------------------------------------------------------------------------------------------------
+#---------------------------------------- MOSTRAMOS LOS DETALLES DE UN TICKET x ID ----------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------------------------------
+}elseif(isset($_GET["option"]) && $_GET["option"] == "MostrarTicketId"){ 
+    $datos = $ticket->MostrarTicketId($_POST['Id_Ticket']);
+    if (is_array($datos) && count($datos) > 0) {
+        foreach($datos as $row){
+            $output["Id_Ticket"] = $row["Id_Ticket"];
+            $output["Id_Usuario"] = $row["Id_Usuario"];
+            $output["Nom_Categoria"] = $row["Nom_Categoria"];
+            $output["Tit_Ticket"] = $row["Tit_Ticket"];
+            $output["Desc_Ticket"] = $row["Desc_Ticket"];
+    
+            if ($row["Nom_EstatusTicket"] == "Abierto") {
+                $output["Nom_EstatusTicket"] = '<span class="label label-pill label-success">Abierto</span>';
+            } elseif ($row["Nom_EstatusTicket"] == "En Proceso") {
+                $output["Nom_EstatusTicket"] = '<span class="label label-pill label-warning">En Proceso</span>';
+            } else {
+                $output["Nom_EstatusTicket"] = '<span class="label label-pill label-danger">Cerrado</span>';
+            }
+    
+            $output["tick_estado_texto"] = $row["Est_Ticket"];
+            $output["Fecha_Creacion"] = date("d/m/Y H:i:s", strtotime($row["Fecha_Creacion"]));
+            $output["Nom_Usuario"] = $row["Nom_Usuario"];
+            $output["Ape_Usuario"] = $row["Ape_Usuario"];
+            $output["Nom_Categoria"] = $row["Nom_Categoria"];
+        }
+        echo json_encode($output);
+    }
+#--------------------------------------------------------------------------------------------------------------------------------------------
+#---------------------------------------- INSERTA DETALLE DE TICKET  ----------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------------------------------
+}elseif(isset($_GET["option"]) && $_GET["option"] == "InsertarDetalleTicket"){
+    $Id_Ticket = isset($_POST['Id_Ticket']) ? $_POST['Id_Ticket'] : null;
+    $Id_Usuario = isset($_POST['Id_Usuario']) ? $_POST['Id_Usuario'] : null;
+    $Desc_Detalle = isset($_POST['Desc_Detalle']) ? $_POST['Desc_Detalle'] : '';
+    $ticket->InsertarDetalleTicket($Id_Ticket, $Id_Usuario, $Desc_Detalle);
+
+#--------------------------------------------------------------------------------------------------------------------------------------------
+#---------------------------------------- CERRAR TICKET  ------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------------------------------
+
+// }elseif(isset($_GET["option"]) && $_GET["option"] == "ActualizarTicket"){ # CONTROLADOR PARA ACTUALIZAR TICKET
+//     $id_ticket = isset($_POST['Id_Ticket']) ? $_POST['Id_Ticket'] : null;
+//     $ticket->ActualizarTicket($id_ticket);
+}elseif (isset($_GET["option"]) && $_GET["option"] == "ActualizarTicket") {
+    try {
+        // Obtener el ID del ticket desde POST
+        $id_ticket = isset($_POST['Id_Ticket']) ? $_POST['Id_Ticket'] : null;
+
+        // Validar que el ID del ticket no sea nulo
+        if (!$id_ticket) {
+            echo json_encode(["status" => "error", "message" => "ID del ticket no proporcionado."]);
+            exit;
+        }
+
+        // Llamar al método para actualizar el ticket
+        $ticket = new Ticket();
+        $resultado = $ticket->ActualizarTicket($id_ticket);
+
+        // Retornar una respuesta JSON
+        if ($resultado) {
+            echo json_encode(["status" => "success", "message" => "Ticket cerrado correctamente."]);
+        } else {
+            echo json_encode(["status" => "error", "message" => "No se pudo cerrar el ticket."]);
+        }
+    } catch (Exception $e) {
+        // Log del error (opcional)
+        error_log("Error en el controlador ActualizarTicket: " . $e->getMessage());
+        // Retornar un mensaje de error
+        echo json_encode(["status" => "error", "message" => "Ocurrió un error al cerrar el ticket."]);
+    }
 }

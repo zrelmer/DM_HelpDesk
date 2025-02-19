@@ -23,6 +23,41 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         },
     });
+	// Custom keyboard shortcuts
+    $(document).on('keydown', function(e) {
+        if (e.ctrlKey && e.key === 'b') {
+            document.execCommand('bold');
+            e.preventDefault();
+        }
+        if (e.ctrlKey && e.key === 'i') {
+            document.execCommand('italic');
+            e.preventDefault();
+        }
+        if (e.ctrlKey && e.key === 'u') {
+            document.execCommand('underline');
+            e.preventDefault();
+        }
+        if (e.ctrlKey && e.key === 'c') {
+            navigator.clipboard.writeText(window.getSelection().toString());
+            e.preventDefault();
+        }
+        if (e.ctrlKey && e.key === 'x') {
+            navigator.clipboard.writeText(window.getSelection().toString()).then(() => {
+                document.execCommand('delete');
+            });
+            e.preventDefault();
+        }
+        if (e.ctrlKey && e.key === 'v') {
+            navigator.clipboard.readText().then(text => {
+                document.execCommand('insertText', false, text);
+            });
+            e.preventDefault();
+        }
+        if (e.key === 'Delete') {
+            document.execCommand('delete');
+            e.preventDefault();
+        }
+    });
 
     // Llenar el combobox usando Fetch
     fetch("../../Controller/categoria.php?option=combo")

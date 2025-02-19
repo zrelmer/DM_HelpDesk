@@ -90,6 +90,10 @@ if(isset($_SESSION["Id_Usuario"])){
             </div><!--.box-typical-->
         </div><!--.container-fluid-->
     </div><!--.page-content-->
+    <!-- HACEMOS USO DE LOS ARCHIVOS JS DE LA PAGINA -->
+    <?php require_once("../MainJs/Js.php");?>
+	<!-- AGREGAMOS EL ARCHIVO JS QUE VA CONTRALAR EL HTML DE HOME -->
+	<script type="text/javascript" src="DetalleTicket.js"></script>
 
 </body>
 </html>
